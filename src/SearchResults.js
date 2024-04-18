@@ -1,10 +1,14 @@
 import React from 'react';
 
-function SearchResults() {
+function SearchResults({ searchResults }) {
   return (
     <div>
-      <h2>Search Results:</h2>
-      <p>Results will be displayed here...</p>
+      {searchResults.map(track => (
+        <div key={track.id}>
+          <h2>{track.name}</h2>
+          <p>{track.artist} | {track.album}</p>
+        </div>
+      ))}
     </div>
   );
 }
