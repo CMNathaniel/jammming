@@ -1,9 +1,11 @@
 import React from 'react';
 
-function Track() {
+function Track({ track, onRemove }) {
   return (
     <div>
-      <p>Track details will be displayed here...</p>
+      <h3>{track.name}</h3>
+      <p>{track.artist} | {track.album}</p>
+      <button onClick={() => onRemove(track)}>-</button>
     </div>
   );
 }

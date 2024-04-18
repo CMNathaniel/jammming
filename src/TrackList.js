@@ -1,11 +1,12 @@
 import React from 'react';
 import Track from './Track';
 
-function TrackList() {
+function TrackList({ tracks, onRemove }) {
   return (
     <div>
-      <h2>Track List:</h2>
-      <Track />
+      {tracks.map(track => (
+        <Track key={track.id} track={track} onRemove={onRemove} />
+      ))}
     </div>
   );
 }
