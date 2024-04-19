@@ -7,12 +7,12 @@ import Playlist from './Playlist';
 
 function App() {
   const [searchResults, setSearchResults] = useState([
-    { id: 1, name: "Baby Baby", artist: "Artist1", album: "Album1" },
-    { id: 2, name: "Monster Mash", artist: "Artist2", album: "Album2" },
-    { id: 3, name: "Eclipse", artist: "Artist3", album: "Album3" },
+    { id: 1, name: "Baby Baby", artist: "Artist1", album: "Album1", uri: "spotify:track:6rqhFgbbKwnb9MLmUQDhG6" },
+    { id: 2, name: "Monster Mash", artist: "Artist2", album: "Album2", uri: "spotify:track:5CQ30WqJwcep0pYcV4AMNc" },
+    { id: 3, name: "Eclipse", artist: "Artist3", album: "Album3", uri: "spotify:track:2xLMifQCjDGFmkHkpNLD9h" },
   ]);
 
-  const [playlistName, setPlaylistName] = useState("My New Playlist");
+  const [playlistName, setPlaylistName] = useState("New Playlist");
   const [playlistTracks, setPlaylistTracks] = useState([
     { id: 4, name: "Why Forever?", artist: "Artist4", album: "Album4" },
     { id: 5, name: "Love me Always", artist: "Artist5", album: "Album5" },
@@ -34,6 +34,15 @@ function App() {
     setPlaylistTracks(prevTracks => prevTracks.filter(savedTrack => savedTrack.id !== track.id));
   };
 
+  const savePlaylist = () => {
+    const trackURIs = playlistTracks.map(track => track.uri);
+    // TODO: Save the playlist to the user's Spotify account using the Spotify API.
+
+    // Reset the playlist.
+    setPlaylistName("New Playlist");
+    setPlaylistTracks([]);
+  };
+
   return (
     <div className="App">
       <h1>Jammming App</h1>
@@ -45,7 +54,13 @@ function App() {
           <SearchResults searchResults={searchResults} onAdd={addTrack}/>
         </div>
         <div className="playlist">
-          <Playlist playlistName={playlistName} playlistTracks={playlistTracks} onNameChange={handleNameChange} onRemove={removeTrack}/>
+          <Playlist 
+            playlistName={playlistName} 
+            playlistTracks={playlistTracks} 
+            onNameChange={handleNameChange} 
+            onRemove={removeTrack}
+            onSave={savePlaylist}
+          />
         </div>
       </div>
     </div>
