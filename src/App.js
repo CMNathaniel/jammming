@@ -7,21 +7,14 @@ import Spotify from './Spotify';
 
 
 function App() {
-  const [searchResults, setSearchResults] = useState([
-    { id: 1, name: "Baby Baby", artist: "Artist1", album: "Album1", uri: "spotify:track:6rqhFgbbKwnb9MLmUQDhG6" },
-    { id: 2, name: "Monster Mash", artist: "Artist2", album: "Album2", uri: "spotify:track:5CQ30WqJwcep0pYcV4AMNc" },
-    { id: 3, name: "Eclipse", artist: "Artist3", album: "Album3", uri: "spotify:track:2xLMifQCjDGFmkHkpNLD9h" },
-  ]);
-
+  const [searchResults, setSearchResults] = useState([]);
   const [playlistName, setPlaylistName] = useState("New Playlist");
-  const [playlistTracks, setPlaylistTracks] = useState([
-    { id: 4, name: "Why Forever?", artist: "Artist4", album: "Album4" },
-    { id: 5, name: "Love me Always", artist: "Artist5", album: "Album5" },
-    { id: 6, name: "No way Jose", artist: "Artist6", album: "Album6" },
-  ]);
+  const [playlistTracks, setPlaylistTracks] = useState([]);
 
   const search = term => {
+    console.log("Searching for:", term);
     Spotify.search(term).then(results => {
+      console.log("Search results:", results);
       setSearchResults(results);
     });
   };

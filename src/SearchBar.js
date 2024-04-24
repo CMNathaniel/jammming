@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Spotify from './Spotify';
+// import Spotify from './Spotify';
 
 function SearchBar(props) {
   const [term, setTerm] = useState('');
