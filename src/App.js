@@ -3,6 +3,7 @@ import './App.css';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import Playlist from './Playlist';
+import Spotify from './Spotify';
 
 
 function App() {
@@ -18,6 +19,12 @@ function App() {
     { id: 5, name: "Love me Always", artist: "Artist5", album: "Album5" },
     { id: 6, name: "No way Jose", artist: "Artist6", album: "Album6" },
   ]);
+
+  const search = term => {
+    Spotify.search(term).then(results => {
+      setSearchResults(results);
+    });
+  };
 
   const handleNameChange = (event) => {
     setPlaylistName(event.target.value);
@@ -35,19 +42,18 @@ function App() {
   };
 
   const savePlaylist = () => {
-    const trackURIs = playlistTracks.map(track => track.uri);
-    // TODO: Save the playlist to the user's Spotify account using the Spotify API.
-
-    // Reset the playlist.
-    setPlaylistName("New Playlist");
-    setPlaylistTracks([]);
+    const trackUris = playlistTracks.map(track => track.uri);
+    Spotify.savePlaylist(playlistName, trackUris).then(() => {
+      setPlaylistName("New Playlist");
+      setPlaylistTracks([]);
+    });
   };
 
   return (
     <div className="App">
       <h1>Jammming App</h1>
       <div className="search-bar">
-        <SearchBar />
+        <SearchBar onSearch={search} />
       </div>
       <div className="container">
         <div className="search-results">
